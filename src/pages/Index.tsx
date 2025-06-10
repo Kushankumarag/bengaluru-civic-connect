@@ -1,12 +1,17 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Camera, Shield, Construction, Droplets, Zap, Navigation, MapPin, Users, Share2, Globe, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 const Index = () => {
   const [language, setLanguage] = useState('English');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const languages = ['English', 'ಕನ್ನಡ', 'हिन्दी'];
+
   const issueTypes = [{
     icon: Construction,
     label: 'Roads & Infrastructure',
@@ -24,6 +29,7 @@ const Index = () => {
     label: 'Traffic & Transport',
     color: 'text-green-600'
   }];
+
   const features = [{
     icon: MapPin,
     title: 'Auto-Location Detection',
@@ -41,6 +47,7 @@ const Index = () => {
     title: 'Social Media Integration',
     description: 'Auto-tag relevant authorities on Twitter and Facebook'
   }];
+
   return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
@@ -49,7 +56,7 @@ const Index = () => {
             <div className="w-8 h-8 bg-civic-blue rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-civic-blue">Urban Eye </span>
+            <span className="text-xl font-bold text-civic-blue">Urban Eye </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -78,7 +85,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <Badge className="mb-6 bg-white/20 text-white border-white/30">🏛️  Bengaluru Civic Platform</Badge>
+            <Badge className="mb-6 bg-white/20 text-white border-white/30">🏛️  Bengaluru Civic Platform</Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Report Civic Issues in Bengaluru
             </h1>
@@ -92,10 +99,12 @@ const Index = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-white text-civic-blue hover:bg-gray-100 px-8 py-4 text-lg font-semibold w-full sm:w-auto">
-                <Camera className="w-5 h-5 mr-2" />
-                📸 Report an Issue (User Login)
-              </Button>
+              <Link to="/signup">
+                <Button size="lg" className="bg-white text-civic-blue hover:bg-gray-100 px-8 py-4 text-lg font-semibold w-full sm:w-auto">
+                  <Camera className="w-5 h-5 mr-2" />
+                  📸 Report an Issue (User Login)
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-blue px-8 py-4 text-lg font-semibold w-full sm:w-auto text-blue-700">
                 <Shield className="w-5 h-5 mr-2" />
                 🔐 Admin Login
@@ -184,9 +193,11 @@ const Index = () => {
             Join thousands of Bengaluru citizens who are actively improving their city
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-civic-green hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-              Get Started - Report Now
-            </Button>
+            <Link to="/signup">
+              <Button size="lg" className="bg-white text-civic-green hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                Get Started - Report Now
+              </Button>
+            </Link>
             <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold text-[#34bf1d]">
               Download Mobile App (Coming Soon)
             </Button>
@@ -256,4 +267,5 @@ const Index = () => {
       </footer>
     </div>;
 };
+
 export default Index;
