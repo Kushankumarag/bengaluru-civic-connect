@@ -1,9 +1,6 @@
-
 import { Shield } from 'lucide-react';
-
 const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white py-12 px-4">
+  return <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
@@ -11,7 +8,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-civic-blue rounded-lg flex items-center justify-center">
                 <Shield className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Namma Bengaluru</span>
+              <span className="text-xl font-bold">Urban Eye</span>
             </div>
             <p className="text-gray-400">
               Making Bengaluru better, one report at a time.
@@ -61,8 +58,6 @@ const Footer = () => {
           <p>© 2025 Urban Eye . All rights reserved. | A citizen-first initiative.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
