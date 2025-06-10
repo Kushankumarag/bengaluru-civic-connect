@@ -30,10 +30,12 @@ const Hero = () => {
                 📸 Report an Issue (User Login)
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-blue px-8 py-4 text-lg font-semibold w-full sm:w-auto text-blue-700">
-              <Shield className="w-5 h-5 mr-2" />
-              🔐 Admin Login
-            </Button>
+            <Link to="/admin-login">
+              <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-blue px-8 py-4 text-lg font-semibold w-full sm:w-auto text-blue-700">
+                <Shield className="w-5 h-5 mr-2" />
+                🔐 Admin Login
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
