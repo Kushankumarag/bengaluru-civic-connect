@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import { Shield, Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [language, setLanguage] = useState('English');
@@ -27,6 +29,11 @@ const Header = () => {
           >
             {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
           </select>
+          <Link to="/signup">
+            <Button variant="outline" size="sm" className="border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white">
+              Sign Up
+            </Button>
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -37,7 +44,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t p-4">
+        <div className="md:hidden bg-white border-t p-4 space-y-4">
           <select 
             value={language} 
             onChange={e => setLanguage(e.target.value)} 
@@ -45,6 +52,11 @@ const Header = () => {
           >
             {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
           </select>
+          <Link to="/signup" className="block">
+            <Button variant="outline" className="w-full border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white">
+              Sign Up
+            </Button>
+          </Link>
         </div>
       )}
     </header>
