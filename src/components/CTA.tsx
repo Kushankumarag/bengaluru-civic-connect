@@ -15,7 +15,7 @@ const CTA = () => {
               Get Started - Report Now
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green py-4 text-lg font-semibold text-[#34bf1d] px-[38px]">Download App -(Coming Soon)</Button>
+          <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green font-semibold text-[#34bf1d] text-lg text-justify px-[32px] py-[16px]">Download App -(Coming Soon)</Button>
         </div>
       </div>
     </section>;
