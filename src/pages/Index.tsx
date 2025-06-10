@@ -254,7 +254,7 @@ const Index = () => {
           </div>
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Namma Bengaluru. All rights reserved. | A citizen-first initiative.</p>
+            <p>© 2025 Urban Eye . All rights reserved. | A citizen-first initiative.</p>
           </div>
         </div>
       </footer>
