@@ -1,61 +1,47 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Camera, 
-  Shield, 
-  Construction, 
-  Droplets, 
-  Zap, 
-  Navigation, 
-  MapPin, 
-  Users, 
-  Share2, 
-  Globe,
-  Menu,
-  X
-} from 'lucide-react';
-
+import { Camera, Shield, Construction, Droplets, Zap, Navigation, MapPin, Users, Share2, Globe, Menu, X } from 'lucide-react';
 const Index = () => {
   const [language, setLanguage] = useState('English');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const languages = ['English', 'ಕನ್ನಡ', 'हिन्दी'];
-
-  const issueTypes = [
-    { icon: Construction, label: 'Roads & Infrastructure', color: 'text-orange-600' },
-    { icon: Droplets, label: 'Drainage & Water', color: 'text-blue-600' },
-    { icon: Zap, label: 'Power & Utilities', color: 'text-yellow-600' },
-    { icon: Navigation, label: 'Traffic & Transport', color: 'text-green-600' }
-  ];
-
-  const features = [
-    {
-      icon: MapPin,
-      title: 'Auto-Location Detection',
-      description: 'GPS-powered precise location tracking for faster resolution'
-    },
-    {
-      icon: Users,
-      title: 'ML-Powered Classification',
-      description: 'Smart issue categorization and automatic department routing'
-    },
-    {
-      icon: Globe,
-      title: 'Public Issue Map',
-      description: 'Real-time map showing reported issues and their status'
-    },
-    {
-      icon: Share2,
-      title: 'Social Media Integration',
-      description: 'Auto-tag relevant authorities on Twitter and Facebook'
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const issueTypes = [{
+    icon: Construction,
+    label: 'Roads & Infrastructure',
+    color: 'text-orange-600'
+  }, {
+    icon: Droplets,
+    label: 'Drainage & Water',
+    color: 'text-blue-600'
+  }, {
+    icon: Zap,
+    label: 'Power & Utilities',
+    color: 'text-yellow-600'
+  }, {
+    icon: Navigation,
+    label: 'Traffic & Transport',
+    color: 'text-green-600'
+  }];
+  const features = [{
+    icon: MapPin,
+    title: 'Auto-Location Detection',
+    description: 'GPS-powered precise location tracking for faster resolution'
+  }, {
+    icon: Users,
+    title: 'ML-Powered Classification',
+    description: 'Smart issue categorization and automatic department routing'
+  }, {
+    icon: Globe,
+    title: 'Public Issue Map',
+    description: 'Real-time map showing reported issues and their status'
+  }, {
+    icon: Share2,
+    title: 'Social Media Integration',
+    description: 'Auto-tag relevant authorities on Twitter and Facebook'
+  }];
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -68,40 +54,23 @@ const Index = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <select 
-              value={language} 
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-transparent border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue"
-            >
-              {languages.map(lang => (
-                <option key={lang} value={lang}>{lang}</option>
-              ))}
+            <select value={language} onChange={e => setLanguage(e.target.value)} className="bg-transparent border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue">
+              {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
             </select>
           </nav>
 
           {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2"
-          >
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2">
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t p-4">
-            <select 
-              value={language} 
-              onChange={(e) => setLanguage(e.target.value)}
-              className="w-full bg-transparent border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue"
-            >
-              {languages.map(lang => (
-                <option key={lang} value={lang}>{lang}</option>
-              ))}
+        {mobileMenuOpen && <div className="md:hidden bg-white border-t p-4">
+            <select value={language} onChange={e => setLanguage(e.target.value)} className="w-full bg-transparent border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue">
+              {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
             </select>
-          </div>
-        )}
+          </div>}
       </header>
 
       {/* Hero Section */}
@@ -125,18 +94,11 @@ const Index = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                size="lg" 
-                className="bg-white text-civic-blue hover:bg-gray-100 px-8 py-4 text-lg font-semibold w-full sm:w-auto"
-              >
+              <Button size="lg" className="bg-white text-civic-blue hover:bg-gray-100 px-8 py-4 text-lg font-semibold w-full sm:w-auto">
                 <Camera className="w-5 h-5 mr-2" />
                 📸 Report an Issue (User Login)
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-civic-blue px-8 py-4 text-lg font-semibold w-full sm:w-auto"
-              >
+              <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-blue px-8 py-4 text-lg font-semibold w-full sm:w-auto text-blue-700">
                 <Shield className="w-5 h-5 mr-2" />
                 🔐 Admin Login
               </Button>
@@ -158,14 +120,12 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {issueTypes.map((type, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer group">
+            {issueTypes.map((type, index) => <Card key={index} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer group">
                 <CardContent className="p-6 text-center">
                   <type.icon className={`w-12 h-12 mx-auto mb-4 ${type.color} group-hover:scale-110 transition-transform duration-300`} />
                   <h3 className="font-semibold text-gray-900">{type.label}</h3>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -183,15 +143,13 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="text-center group">
+            {features.map((feature, index) => <div key={index} className="text-center group">
                 <div className="w-16 h-16 bg-civic-light-blue rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-civic-blue transition-colors duration-300">
                   <feature.icon className="w-8 h-8 text-civic-blue group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -230,17 +188,10 @@ const Index = () => {
             Join thousands of Bengaluru citizens who are actively improving their city
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-white text-civic-green hover:bg-gray-100 px-8 py-4 text-lg font-semibold"
-            >
+            <Button size="lg" className="bg-white text-civic-green hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
               Get Started - Report Now
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold"
-            >
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold">
               Download Mobile App (Coming Soon)
             </Button>
           </div>
@@ -309,8 +260,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
