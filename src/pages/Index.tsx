@@ -49,7 +49,7 @@ const Index = () => {
             <div className="w-8 h-8 bg-civic-blue rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-civic-blue">Namma Bengaluru</span>
+            <span className="text-xl font-bold text-civic-blue">Urban Eye </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -159,11 +159,11 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold mb-2">25,000+</div>
+              <div className="text-4xl font-bold mb-2">250+</div>
               <div className="text-blue-100">Issues Reported</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">18,500+</div>
+              <div className="text-4xl font-bold mb-2">100+</div>
               <div className="text-blue-100">Issues Resolved</div>
             </div>
             <div>
@@ -171,7 +171,7 @@ const Index = () => {
               <div className="text-blue-100">Resolution Rate</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">15 days</div>
+              <div className="text-4xl font-bold mb-2">7 days</div>
               <div className="text-blue-100">Avg. Resolution Time</div>
             </div>
           </div>
@@ -191,7 +191,7 @@ const Index = () => {
             <Button size="lg" className="bg-white text-civic-green hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
               Get Started - Report Now
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold">
+            <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold text-[#34bf1d]">
               Download Mobile App (Coming Soon)
             </Button>
           </div>
@@ -248,9 +248,7 @@ const Index = () => {
                 </a>
               </div>
               <div className="mt-4">
-                <p className="text-gray-400 text-sm">
-                  📞 Helpline: 1800-XXX-XXXX
-                </p>
+                <p className="text-gray-400 text-sm">📞 Helpline: +91 89XXX XXX86</p>
               </div>
             </div>
           </div>
