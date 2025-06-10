@@ -1,12 +1,9 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Camera, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Hero = () => {
-  return (
-    <section className="relative py-20 px-4 civic-gradient text-white overflow-hidden">
+  return <section className="relative py-20 px-4 civic-gradient text-white overflow-hidden">
       <div className="absolute inset-0 bg-black/10"></div>
       <div className="container mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
@@ -25,7 +22,7 @@ const Hero = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to="/signup">
-              <Button size="lg" className="bg-white text-civic-blue hover:bg-gray-100 px-8 py-4 text-lg font-semibold w-full sm:w-auto">
+              <Button size="lg" className="bg-white text-civic-blue hover:bg-gray-100 py-4 text-lg font-semibold w-full sm:w-auto px-[28px]">
                 <Camera className="w-5 h-5 mr-2" />
                 📸 Report an Issue (User Login)
               </Button>
@@ -37,8 +34,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

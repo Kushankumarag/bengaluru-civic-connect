@@ -1,10 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const CTA = () => {
-  return (
-    <section className="py-16 px-4 bg-civic-green text-white">
+  return <section className="py-16 px-4 bg-civic-green text-white">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Ready to Make a Difference?
@@ -18,13 +15,9 @@ const CTA = () => {
               Get Started - Report Now
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold text-[#34bf1d]">
-            Download Mobile App (Coming Soon)
-          </Button>
+          <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green px-8 py-4 text-lg font-semibold text-[#34bf1d]">Download App -(Coming Soon)</Button>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTA;
