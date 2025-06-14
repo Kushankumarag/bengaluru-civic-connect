@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Download } from 'lucide-react';
 const CTA = () => {
   return <section className="py-20 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 civic-gradient opacity-10"></div>
+      <div className="absolute inset-0 civic-gradient opacity-10 bg-black"></div>
       
       <div className="container mx-auto text-center relative z-10">
         <div className="glass-card p-12 rounded-2xl max-w-4xl mx-auto">
@@ -24,7 +24,7 @@ const CTA = () => {
               </Button>
             </Link>
             
-            <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300 bg-black text-white">
+            <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300 text-white bg-black">
               <Download className="w-5 h-5 mr-2" />
               Download App (Coming Soon)
             </Button>

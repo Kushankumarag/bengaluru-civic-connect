@@ -1,5 +1,5 @@
 const Stats = () => {
-  return <section className="py-16 px-4 bg-civic-blue text-white mx-0 my-0 rounded-full bg-black">
+  return <section className="py-16 px-4 bg-civic-blue text-white mx-0 my-0 rounded-full bg-inherit">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>

@@ -18,7 +18,7 @@ const IssueTypes = () => {
     label: 'Traffic & Transport',
     color: 'text-green-600'
   }];
-  return <section className="py-16 px-4 bg-inherit">
+  return <section className="py-16 px-4 bg-gray-900">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-inherit">

@@ -17,8 +17,8 @@ const Features = () => {
     title: 'Social Media Integration',
     description: 'Auto-tag relevant authorities on Twitter and Facebook'
   }];
-  return <section className="py-16 px-4">
-      <div className="container mx-auto">
+  return <section className="py-16 px-4 bg-inherit">
+      <div className="container mx-auto bg-inherit">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-50">Why Choose Urban Eye?</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">

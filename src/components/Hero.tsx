@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="absolute inset-0 civic-gradient-subtle"></div>
       
       {/* Floating particles effect */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-gray-900">
         <div className="absolute top-20 left-10 w-2 h-2 bg-civic-accent rounded-full animate-float opacity-60"></div>
         <div className="absolute top-40 right-20 w-3 h-3 bg-civic-accent rounded-full animate-float opacity-40" style={{
         animationDelay: '1s'
