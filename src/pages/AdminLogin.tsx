@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Shield, ArrowLeft, Building2, Lock, Mail, Key } from 'lucide-react';
+import { Shield, ArrowLeft, Building2, Lock, Mail, Key, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AdminLogin = () => {

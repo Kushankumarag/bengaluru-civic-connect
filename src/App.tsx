@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import AdminLogin from "./pages/AdminLogin";
+import AdminSignUp from "./pages/AdminSignUp";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin-signup" element={<AdminSignUp />} />
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
