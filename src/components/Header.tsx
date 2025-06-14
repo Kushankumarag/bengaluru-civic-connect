@@ -17,9 +17,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-4">
-          <select value={language} onChange={e => setLanguage(e.target.value)} className="glass text-civic-light border-0 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-accent">
-            {languages.map(lang => <option key={lang} value={lang} className="bg-civic-dark">{lang}</option>)}
-          </select>
+          
           
           <Link to="/signup">
             <Button className="glass-card hover:glow-hover text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300 bg-black text-inherit">
