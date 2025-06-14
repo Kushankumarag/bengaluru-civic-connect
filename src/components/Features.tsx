@@ -1,6 +1,4 @@
-
 import { MapPin, Users, Globe, Share2 } from 'lucide-react';
-
 const Features = () => {
   const features = [{
     icon: MapPin,
@@ -19,31 +17,25 @@ const Features = () => {
     title: 'Social Media Integration',
     description: 'Auto-tag relevant authorities on Twitter and Facebook'
   }];
-
-  return (
-    <section className="py-16 px-4">
+  return <section className="py-16 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Why Choose Urban Eye?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-50">Why Choose Urban Eye?</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Advanced technology meets civic responsibility
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="text-center group">
+          {features.map((feature, index) => <div key={index} className="text-center group">
               <div className="w-16 h-16 bg-civic-light-blue rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-civic-blue transition-colors duration-300">
                 <feature.icon className="w-8 h-8 text-civic-blue group-hover:text-white transition-colors duration-300" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Features;
