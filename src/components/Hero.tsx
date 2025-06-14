@@ -46,7 +46,7 @@ const Hero = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link to="/login">
-              <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto text-white bg-black">
+              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg transition-all duration-300 w-full sm:w-auto text-inherit bg-black font-semibold">
                 <Camera className="w-6 h-6 mr-3" />
                 Report an Issue
               </Button>
