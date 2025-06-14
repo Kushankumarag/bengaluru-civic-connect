@@ -9,6 +9,8 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, fullName: string, phone: string, address: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
+  adminSignUp: (email: string, password: string, fullName: string, phone: string, division: string, accessCode: string) => Promise<{ error: any }>;
+  adminSignIn: (email: string, password: string, division: string, accessCode: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
 
@@ -58,7 +60,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         data: {
           full_name: fullName,
           phone: phone,
-          address: address
+          address: address,
+          user_type: 'user'
         }
       }
     });
@@ -67,6 +70,67 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signIn = async (email: string, password: string) => {
+    // First check if user exists in profiles table
+    const { data: userProfile, error: profileError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (profileError && profileError.code !== 'PGRST116') {
+      return { error: profileError };
+    }
+
+    if (!userProfile) {
+      return { error: { message: 'User not found. Please sign up first.' } };
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return { error };
+  };
+
+  const adminSignUp = async (email: string, password: string, fullName: string, phone: string, division: string, accessCode: string) => {
+    const redirectUrl = `${window.location.origin}/admin-dashboard`;
+    
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: redirectUrl,
+        data: {
+          full_name: fullName,
+          phone: phone,
+          division: division,
+          access_code: accessCode,
+          user_type: 'admin'
+        }
+      }
+    });
+    
+    return { error };
+  };
+
+  const adminSignIn = async (email: string, password: string, division: string, accessCode: string) => {
+    // First check if admin exists in admin_profiles table with matching division and access code
+    const { data: adminProfile, error: profileError } = await supabase
+      .from('admin_profiles')
+      .select('*')
+      .eq('email', email)
+      .eq('division', division)
+      .eq('access_code', accessCode)
+      .maybeSingle();
+
+    if (profileError && profileError.code !== 'PGRST116') {
+      return { error: profileError };
+    }
+
+    if (!adminProfile) {
+      return { error: { message: 'Admin not found or invalid credentials. Please check your division and access code.' } };
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -84,6 +148,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loading,
     signUp,
     signIn,
+    adminSignUp,
+    adminSignIn,
     signOut,
   };
 

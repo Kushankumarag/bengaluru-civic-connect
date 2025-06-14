@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,11 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Shield, User, Mail, Phone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
 import DivisionSelect from './DivisionSelect';
 import PasswordInput from './PasswordInput';
 import AccessCodeInput from './AccessCodeInput';
+
 const AdminSignUpForm = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -28,25 +30,25 @@ const AdminSignUpForm = () => {
     accessCode: '',
     division: ''
   });
-  const {
-    toast
-  } = useToast();
+  
+  const { toast } = useToast();
   const navigate = useNavigate();
+  const { adminSignUp } = useAuth();
+
   const generateAccessCode = (division: string) => {
     if (!division) return '';
     const divisionName = division.split(' ')[0];
     const prefix = divisionName.substring(0, 4).toUpperCase();
     return `${prefix}-2025`;
   };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      name,
-      value
-    } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({
         ...prev,
@@ -54,12 +56,14 @@ const AdminSignUpForm = () => {
       }));
     }
   };
+
   const handleDivisionChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       division: value,
       accessCode: ''
     }));
+
     if (errors.division) {
       setErrors(prev => ({
         ...prev,
@@ -67,11 +71,13 @@ const AdminSignUpForm = () => {
       }));
     }
   };
+
   const validateAccessCode = () => {
     if (!formData.division || !formData.accessCode) return false;
     const expectedCode = generateAccessCode(formData.division);
     return formData.accessCode === expectedCode;
   };
+
   const validateForm = () => {
     const newErrors = {
       email: '',
@@ -80,55 +86,53 @@ const AdminSignUpForm = () => {
       accessCode: '',
       division: ''
     };
+
     if (formData.email && !formData.email.endsWith('.gov.in')) {
       newErrors.email = 'Official email must end with .gov.in';
     }
+
     if (formData.password.length < 8) {
       newErrors.password = 'Password must be at least 8 characters long';
     }
+
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
+
     if (!formData.division) {
       newErrors.division = 'Please select your division';
     }
+
     if (!validateAccessCode()) {
       newErrors.accessCode = 'Invalid access code for selected division';
     }
+
     setErrors(newErrors);
     return !Object.values(newErrors).some(error => error !== '');
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
+
     setIsLoading(true);
     try {
-      const {
-        data: authData,
-        error: authError
-      } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/admin-dashboard`,
-          data: {
-            full_name: formData.fullName,
-            phone: formData.phone
-          }
-        }
-      });
-      if (authError) throw authError;
-      if (authData.user) {
-        const {
-          error: profileError
-        } = await supabase.from('admin_profiles').insert({
-          id: authData.user.id,
-          full_name: formData.fullName,
-          email: formData.email,
-          division: formData.division,
-          access_code: formData.accessCode
+      const { error } = await adminSignUp(
+        formData.email,
+        formData.password,
+        formData.fullName,
+        formData.phone,
+        formData.division,
+        formData.accessCode
+      );
+
+      if (error) {
+        toast({
+          title: "Registration Failed",
+          description: error.message || "An error occurred during registration",
+          variant: "destructive"
         });
-        if (profileError) throw profileError;
+      } else {
         toast({
           title: "Registration Successful! ✅",
           description: "Your admin account has been created. Please check your email to verify your account."
@@ -145,9 +149,9 @@ const AdminSignUpForm = () => {
       setIsLoading(false);
     }
   };
-  return <div className="animate-fade-in-up" style={{
-    animationDelay: '0.2s'
-  }}>
+
+  return (
+    <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
       <Card className="glass-card border-civic-accent/20">
         <CardHeader className="text-center space-y-2">
           <div className="w-16 h-16 bg-civic-accent/10 rounded-2xl flex items-center justify-center mx-auto glow">
@@ -167,7 +171,15 @@ const AdminSignUpForm = () => {
               </Label>
               <div className="relative">
                 <User className="absolute left-3 top-3 w-4 h-4 text-civic-accent" />
-                <Input id="fullName" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your full name" required className="pl-10 bg-inherit" />
+                <Input
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  placeholder="Enter your full name"
+                  required
+                  className="pl-10 bg-inherit"
+                />
               </div>
             </div>
 
@@ -178,9 +190,20 @@ const AdminSignUpForm = () => {
               </Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-4 h-4 text-civic-accent" />
-                <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="your.name@bbmp.gov.in" required className="pl-10 bg-inherit" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="your.name@bbmp.gov.in"
+                  required
+                  className="pl-10 bg-inherit"
+                />
               </div>
-              {errors.email && <p className="text-red-400 text-sm animate-pulse">❌ {errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-400 text-sm animate-pulse">❌ {errors.email}</p>
+              )}
             </div>
 
             {/* Phone Number */}
@@ -190,31 +213,74 @@ const AdminSignUpForm = () => {
               </Label>
               <div className="relative">
                 <Phone className="absolute left-3 top-3 w-4 h-4 text-civic-accent" />
-                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="+91 98765 43210" className="pl-10 bg-inherit" />
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="+91 98765 43210"
+                  className="pl-10 bg-inherit"
+                />
               </div>
             </div>
 
             {/* Password */}
-            <PasswordInput id="password" name="password" label="Password" value={formData.password} onChange={handleInputChange} placeholder="Create a secure password" error={errors.password} required />
+            <PasswordInput
+              id="password"
+              name="password"
+              label="Password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Create a secure password"
+              error={errors.password}
+              required
+            />
 
             {/* Confirm Password */}
-            <PasswordInput id="confirmPassword" name="confirmPassword" label="Confirm Password" value={formData.confirmPassword} onChange={handleInputChange} placeholder="Confirm your password" error={errors.confirmPassword} required />
+            <PasswordInput
+              id="confirmPassword"
+              name="confirmPassword"
+              label="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Confirm your password"
+              error={errors.confirmPassword}
+              required
+            />
 
             {/* Division Selector */}
-            <DivisionSelect value={formData.division} onChange={handleDivisionChange} error={errors.division} />
+            <DivisionSelect
+              value={formData.division}
+              onChange={handleDivisionChange}
+              error={errors.division}
+            />
 
             {/* Access Code */}
-            <AccessCodeInput value={formData.accessCode} onChange={handleInputChange} division={formData.division} error={errors.accessCode} />
+            <AccessCodeInput
+              value={formData.accessCode}
+              onChange={handleInputChange}
+              division={formData.division}
+              error={errors.accessCode}
+            />
 
             {/* Submit Button */}
-            <Button type="submit" disabled={isLoading} className="w-full bg-civic-accent/90 text-civic-dark hover:bg-civic-accent border border-civic-accent/50 backdrop-blur-md py-6 text-lg font-semibold transition-all duration-300 disabled:opacity-50 shadow-lg hover:shadow-civic-accent/25">
-              {isLoading ? <div className="flex items-center space-x-2">
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-civic-accent/90 text-civic-dark hover:bg-civic-accent border border-civic-accent/50 backdrop-blur-md py-6 text-lg font-semibold transition-all duration-300 disabled:opacity-50 shadow-lg hover:shadow-civic-accent/25"
+            >
+              {isLoading ? (
+                <div className="flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-2 border-civic-dark border-t-transparent"></div>
                   <span>Creating Account...</span>
-                </div> : <>
+                </div>
+              ) : (
+                <>
                   <Shield className="w-5 h-5 mr-2" />
                   Create Admin Account
-                </>}
+                </>
+              )}
             </Button>
           </form>
         </CardContent>
@@ -226,6 +292,8 @@ const AdminSignUpForm = () => {
           🔐 Secure Registration - All data is encrypted and verified
         </p>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default AdminSignUpForm;
