@@ -18,13 +18,13 @@ const CTA = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/signup">
-              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover px-10 py-6 text-lg font-semibold transition-all duration-300 bg-black">
+              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover px-10 py-6 text-lg font-semibold transition-all duration-300 bg-black text-white">
                 Get Started - Report Now
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
             
-            <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300 text-white bg-black">
+            <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300 bg-black text-white">
               <Download className="w-5 h-5 mr-2" />
               Download App (Coming Soon)
             </Button>
