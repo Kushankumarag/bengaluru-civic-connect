@@ -16,11 +16,7 @@ const AdminSignUpInfo = () => {
         </p>
         
         <div className="space-y-3 text-civic-light/60 text-sm">
-          <div className="glass p-3 rounded-lg">
-            
-            
-            
-          </div>
+          
         </div>
       </div>
     </div>;
