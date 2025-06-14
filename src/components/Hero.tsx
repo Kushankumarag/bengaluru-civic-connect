@@ -1,21 +1,24 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Camera, Shield, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Hero = () => {
-  return (
-    <section className="relative py-32 px-4 overflow-hidden">
+  return <section className="relative py-32 px-4 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 civic-gradient-subtle"></div>
       
       {/* Floating particles effect */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-2 h-2 bg-civic-accent rounded-full animate-float opacity-60"></div>
-        <div className="absolute top-40 right-20 w-3 h-3 bg-civic-accent rounded-full animate-float opacity-40" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-civic-accent rounded-full animate-float opacity-50" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-20 right-1/3 w-4 h-4 bg-civic-accent rounded-full animate-float opacity-30" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute top-40 right-20 w-3 h-3 bg-civic-accent rounded-full animate-float opacity-40" style={{
+        animationDelay: '1s'
+      }}></div>
+        <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-civic-accent rounded-full animate-float opacity-50" style={{
+        animationDelay: '2s'
+      }}></div>
+        <div className="absolute bottom-20 right-1/3 w-4 h-4 bg-civic-accent rounded-full animate-float opacity-30" style={{
+        animationDelay: '0.5s'
+      }}></div>
       </div>
       
       <div className="container mx-auto relative z-10">
@@ -43,20 +46,14 @@ const Hero = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link to="/login">
-              <Button 
-                size="lg" 
-                className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto"
-              >
+              <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto text-black bg-black">
                 <Camera className="w-6 h-6 mr-3" />
                 Report an Issue
               </Button>
             </Link>
             
             <Link to="/admin-login">
-              <Button 
-                size="lg" 
-                className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto"
-              >
+              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto bg-black">
                 <Shield className="w-6 h-6 mr-3" />
                 Admin Dashboard
               </Button>
@@ -80,8 +77,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
