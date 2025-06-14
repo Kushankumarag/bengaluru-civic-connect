@@ -9,6 +9,131 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_actions: {
+        Row: {
+          action_type: string
+          admin_id: string
+          complaint_id: string | null
+          created_at: string
+          details: string | null
+          id: string
+        }
+        Insert: {
+          action_type: string
+          admin_id: string
+          complaint_id?: string | null
+          created_at?: string
+          details?: string | null
+          id?: string
+        }
+        Update: {
+          action_type?: string
+          admin_id?: string
+          complaint_id?: string | null
+          created_at?: string
+          details?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_actions_complaint_id_fkey"
+            columns: ["complaint_id"]
+            isOneToOne: false
+            referencedRelation: "complaints"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      admin_profiles: {
+        Row: {
+          access_code: string | null
+          created_at: string
+          division: string
+          email: string
+          full_name: string
+          id: string
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          access_code?: string | null
+          created_at?: string
+          division: string
+          email: string
+          full_name: string
+          id: string
+          role?: string
+          updated_at?: string
+        }
+        Update: {
+          access_code?: string | null
+          created_at?: string
+          division?: string
+          email?: string
+          full_name?: string
+          id?: string
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      complaints: {
+        Row: {
+          assigned_admin_id: string | null
+          category: string
+          created_at: string
+          description: string | null
+          division: string
+          id: string
+          image_url: string | null
+          latitude: number | null
+          location_address: string | null
+          longitude: number | null
+          resolved_at: string | null
+          severity: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assigned_admin_id?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          division: string
+          id?: string
+          image_url?: string | null
+          latitude?: number | null
+          location_address?: string | null
+          longitude?: number | null
+          resolved_at?: string | null
+          severity?: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          assigned_admin_id?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          division?: string
+          id?: string
+          image_url?: string | null
+          latitude?: number | null
+          location_address?: string | null
+          longitude?: number | null
+          resolved_at?: string | null
+          severity?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           address: string | null
@@ -36,21 +161,6 @@ export type Database = {
           id?: string
           phone?: string | null
           updated_at?: string
-        }
-        Relationships: []
-      }
-      userpasswords: {
-        Row: {
-          created_at: string
-          id: number
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-        }
-        Update: {
-          created_at?: string
-          id?: number
         }
         Relationships: []
       }
