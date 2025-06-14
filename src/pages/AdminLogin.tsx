@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Shield, ArrowLeft, Building2, Lock, Mail, Key, User } from 'lucide-react';
+import { Shield, ArrowLeft, Building2, Lock, Mail, Key } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import DivisionSelect from '@/components/admin/DivisionSelect';
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
@@ -19,33 +19,6 @@ const AdminLogin = () => {
     email: '',
     division: ''
   });
-
-  const divisions = [
-    'East Zone – Indiranagar',
-    'East Zone – C.V. Raman Nagar',
-    'East Zone – Jeevanbhima Nagar',
-    'West Zone – Rajajinagar',
-    'West Zone – Govindarajanagar',
-    'West Zone – Vijayanagar',
-    'South Zone – Basavanagudi',
-    'South Zone – Jayanagar',
-    'South Zone – Banashankari',
-    'Bommanahalli Zone – BTM Layout',
-    'Bommanahalli Zone – HSR Layout',
-    'Bommanahalli Zone – Begur',
-    'Rajarajeshwari Nagar Zone – Kengeri',
-    'Rajarajeshwari Nagar Zone – R.R. Nagar',
-    'Rajarajeshwari Nagar Zone – Ullalu',
-    'Dasarahalli Zone – Bagalagunte',
-    'Dasarahalli Zone – Jalahalli',
-    'Dasarahalli Zone – T. Dasarahalli',
-    'Yelahanka Zone – Yelahanka',
-    'Yelahanka Zone – Byatarayanapura',
-    'Yelahanka Zone – Attur',
-    'Mahadevapura Zone – Whitefield',
-    'Mahadevapura Zone – Marathahalli',
-    'Mahadevapura Zone – KR Puram'
-  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -185,12 +158,12 @@ const AdminLogin = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="your.name@bbmp.gov.in"
-                          className="glass pl-12 text-civic-light border-civic-accent/30 glow-border-focus"
+                          className="pl-12"
                           required
                         />
                       </div>
                       {errors.email && (
-                        <p className="text-red-400 text-sm">{errors.email}</p>
+                        <p className="text-red-400 text-sm animate-pulse">❌ {errors.email}</p>
                       )}
                     </div>
 
@@ -206,36 +179,16 @@ const AdminLogin = () => {
                         value={formData.password}
                         onChange={handleInputChange}
                         placeholder="Enter your secure password"
-                        className="glass text-civic-light border-civic-accent/30 glow-border-focus"
                         required
                       />
                     </div>
 
-                    {/* Division Selector */}
-                    <div className="space-y-2">
-                      <Label htmlFor="division" className="text-civic-light font-medium">
-                        Select Your Division / Zone
-                      </Label>
-                      <Select value={formData.division} onValueChange={handleDivisionChange}>
-                        <SelectTrigger className="glass text-civic-light border-civic-accent/30 glow-border-focus">
-                          <SelectValue placeholder="Choose your assigned division/zone" />
-                        </SelectTrigger>
-                        <SelectContent className="glass bg-civic-dark border-civic-accent/30 max-h-60">
-                          {divisions.map((division) => (
-                            <SelectItem 
-                              key={division} 
-                              value={division}
-                              className="text-civic-light hover:bg-civic-accent/20 focus:bg-civic-accent/20"
-                            >
-                              {division}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      {errors.division && (
-                        <p className="text-red-400 text-sm">{errors.division}</p>
-                      )}
-                    </div>
+                    {/* Division Selector - Using the same component as signup */}
+                    <DivisionSelect 
+                      value={formData.division} 
+                      onChange={handleDivisionChange} 
+                      error={errors.division} 
+                    />
 
                     {/* Access Code */}
                     <div className="space-y-2">
@@ -251,7 +204,7 @@ const AdminLogin = () => {
                           value={formData.accessCode}
                           onChange={handleInputChange}
                           placeholder="Enter security access code"
-                          className="glass pl-12 text-civic-light border-civic-accent/30 glow-border-focus"
+                          className="pl-12"
                           required
                         />
                       </div>
@@ -260,7 +213,7 @@ const AdminLogin = () => {
                     {/* Submit Button */}
                     <Button 
                       type="submit" 
-                      className="w-full bg-civic-accent text-civic-dark hover:bg-civic-accent/90 glow-hover py-6 text-lg font-semibold transition-all duration-300"
+                      className="w-full bg-civic-accent/90 text-civic-dark hover:bg-civic-accent border border-civic-accent/50 backdrop-blur-md py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-civic-accent/25"
                     >
                       <Shield className="w-5 h-5 mr-2" />
                       Secure Login
@@ -277,7 +230,7 @@ const AdminLogin = () => {
               </Card>
 
               {/* Disclaimer */}
-              <div className="mt-6 glass-card p-4 rounded-xl border-yellow-500/30">
+              <div className="mt-6 bg-yellow-500/10 backdrop-blur-md border border-yellow-500/30 p-4 rounded-xl">
                 <p className="text-yellow-400 font-medium text-center text-sm">
                   ⚠️ Unauthorized access is prohibited. All logins are monitored.
                 </p>
