@@ -31,7 +31,7 @@ const Features = () => {
               <div className="w-16 h-16 bg-civic-light-blue rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-civic-blue transition-colors duration-300">
                 <feature.icon className="w-8 h-8 text-civic-blue group-hover:text-white transition-colors duration-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">{feature.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-slate-50">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </div>)}
         </div>
