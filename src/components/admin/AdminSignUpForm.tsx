@@ -187,7 +187,7 @@ const AdminSignUpForm = () => {
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="Enter your full name"
-                  className="bg-civic-dark/80 backdrop-blur-md pl-10 text-civic-light border-civic-accent/30 glow-border-focus focus:bg-civic-dark/90"
+                  className="pl-10"
                   required
                 />
               </div>
@@ -207,7 +207,7 @@ const AdminSignUpForm = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="your.name@bbmp.gov.in"
-                  className="bg-civic-dark/80 backdrop-blur-md pl-10 text-civic-light border-civic-accent/30 glow-border-focus focus:bg-civic-dark/90"
+                  className="pl-10"
                   required
                 />
               </div>
@@ -230,7 +230,7 @@ const AdminSignUpForm = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="+91 98765 43210"
-                  className="bg-civic-dark/80 backdrop-blur-md pl-10 text-civic-light border-civic-accent/30 glow-border-focus focus:bg-civic-dark/90"
+                  className="pl-10"
                 />
               </div>
             </div>
