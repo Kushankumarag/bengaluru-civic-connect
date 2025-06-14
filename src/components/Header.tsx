@@ -21,7 +21,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-4">
           <select 
             value={language} 
             onChange={e => setLanguage(e.target.value)} 
@@ -37,8 +37,14 @@ const Header = () => {
           </Link>
           
           <Link to="/admin-login">
-            <Button className="bg-civic-accent text-civic-dark hover:bg-opacity-80 glow-hover transition-all duration-300">
+            <Button className="bg-civic-accent/20 text-civic-accent border border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover transition-all duration-300">
               Admin Login
+            </Button>
+          </Link>
+
+          <Link to="/admin-signup">
+            <Button className="bg-civic-accent text-civic-dark hover:bg-opacity-80 glow-hover transition-all duration-300">
+              Admin Sign Up
             </Button>
           </Link>
         </nav>
@@ -70,8 +76,14 @@ const Header = () => {
           </Link>
           
           <Link to="/admin-login" className="block">
-            <Button className="w-full bg-civic-accent text-civic-dark hover:bg-opacity-80 transition-all duration-300">
+            <Button className="w-full bg-civic-accent/20 text-civic-accent border border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300">
               Admin Login
+            </Button>
+          </Link>
+
+          <Link to="/admin-signup" className="block">
+            <Button className="w-full bg-civic-accent text-civic-dark hover:bg-opacity-80 transition-all duration-300">
+              Admin Sign Up
             </Button>
           </Link>
         </div>
