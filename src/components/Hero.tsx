@@ -53,7 +53,7 @@ const Hero = () => {
             </Link>
             
             <Link to="/admin-login">
-              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto bg-black">
+              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto bg-black text-inherit">
                 <Shield className="w-6 h-6 mr-3" />
                 Admin Dashboard
               </Button>
