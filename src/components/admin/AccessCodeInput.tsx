@@ -1,4 +1,5 @@
 
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Key } from 'lucide-react';
@@ -33,7 +34,6 @@ const AccessCodeInput = ({ value, onChange, division, error }: AccessCodeInputPr
           name="accessCode"
           value={value}
           onChange={onChange}
-          placeholder={division ? expectedCode : "Select division first"}
           className="glass pl-10 text-civic-light border-civic-accent/30 glow-border-focus"
           required
         />
@@ -46,3 +46,4 @@ const AccessCodeInput = ({ value, onChange, division, error }: AccessCodeInputPr
 };
 
 export default AccessCodeInput;
+
