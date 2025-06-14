@@ -1,7 +1,7 @@
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Key, HelpCircle } from 'lucide-react';
+import { Key } from 'lucide-react';
 
 interface AccessCodeInputProps {
   value: string;
@@ -23,17 +23,9 @@ const AccessCodeInput = ({ value, onChange, division, error }: AccessCodeInputPr
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center space-x-2">
-        <Label htmlFor="accessCode" className="text-civic-light font-medium">
-          Access Code *
-        </Label>
-        <div className="group relative">
-          <HelpCircle className="w-4 h-4 text-civic-accent cursor-help" />
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-civic-dark border border-civic-accent/30 rounded-md text-xs text-civic-light opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
-            {division ? `Expected: ${expectedCode}` : 'Select division first'}
-          </div>
-        </div>
-      </div>
+      <Label htmlFor="accessCode" className="text-civic-light font-medium">
+        Access Code *
+      </Label>
       <div className="relative">
         <Key className="absolute left-3 top-3 w-4 h-4 text-civic-accent" />
         <Input
@@ -48,11 +40,6 @@ const AccessCodeInput = ({ value, onChange, division, error }: AccessCodeInputPr
       </div>
       {error && (
         <p className="text-red-400 text-sm animate-pulse">❌ {error}</p>
-      )}
-      {division && (
-        <p className="text-civic-accent text-xs">
-          Expected format: {expectedCode}
-        </p>
       )}
     </div>
   );
