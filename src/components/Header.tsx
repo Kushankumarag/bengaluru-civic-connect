@@ -20,13 +20,13 @@ const Header = () => {
           
           
           <Link to="/signup">
-            <Button className="glass-card hover:glow-hover text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300 bg-black text-inherit">
+            <Button className="glass-card hover:glow-hover text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300 bg-black text-white">
               User Sign Up
             </Button>
           </Link>
           
           <Link to="/login">
-            <Button className="glass-card hover:glow-hover text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300 text-inherit bg-black">
+            <Button className="glass-card hover:glow-hover text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300 bg-black text-white">
               User Login
             </Button>
           </Link>
