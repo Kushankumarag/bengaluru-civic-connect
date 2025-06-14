@@ -1,11 +1,8 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Download } from 'lucide-react';
-
 const CTA = () => {
-  return (
-    <section className="py-20 px-4 relative overflow-hidden">
+  return <section className="py-20 px-4 relative overflow-hidden">
       <div className="absolute inset-0 civic-gradient opacity-10"></div>
       
       <div className="container mx-auto text-center relative z-10">
@@ -21,27 +18,19 @@ const CTA = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/signup">
-              <Button 
-                size="lg" 
-                className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover px-10 py-6 text-lg font-semibold transition-all duration-300"
-              >
+              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover px-10 py-6 text-lg font-semibold transition-all duration-300 bg-black">
                 Get Started - Report Now
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
             
-            <Button 
-              size="lg" 
-              className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300"
-            >
+            <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300 bg-black text-white">
               <Download className="w-5 h-5 mr-2" />
               Download App (Coming Soon)
             </Button>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTA;
