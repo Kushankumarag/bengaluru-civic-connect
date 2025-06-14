@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +6,6 @@ import { Label } from '@/components/ui/label';
 import { Shield, ArrowLeft, Building2, Lock, Mail, Key } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import DivisionSelect from '@/components/admin/DivisionSelect';
-
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -19,56 +17,56 @@ const AdminLogin = () => {
     email: '',
     division: ''
   });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-
     if (name === 'email' && errors.email) {
-      setErrors(prev => ({ ...prev, email: '' }));
+      setErrors(prev => ({
+        ...prev,
+        email: ''
+      }));
     }
   };
-
   const handleDivisionChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       division: value
     }));
-    
     if (errors.division) {
-      setErrors(prev => ({ ...prev, division: '' }));
+      setErrors(prev => ({
+        ...prev,
+        division: ''
+      }));
     }
   };
-
   const validateForm = () => {
-    const newErrors = { email: '', division: '' };
-
+    const newErrors = {
+      email: '',
+      division: ''
+    };
     if (formData.email && !formData.email.endsWith('.gov.in')) {
       newErrors.email = 'Official email must end with .gov.in';
     }
-
     if (!formData.division) {
       newErrors.division = 'Please select your division/zone';
     }
-
     setErrors(newErrors);
     return !newErrors.email && !newErrors.division;
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (validateForm()) {
       console.log('Admin login form submitted:', formData);
       // TODO: Handle admin login
     }
   };
-
-  return (
-    <div className="min-h-screen bg-civic-dark">
+  return <div className="min-h-screen bg-civic-dark">
       {/* Header */}
       <header className="glass-nav">
         <div className="container mx-auto px-4 h-16 flex items-center">
@@ -130,7 +128,9 @@ const AdminLogin = () => {
             </div>
 
             {/* Right Column - Login Form */}
-            <div className="animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="animate-fade-in-up" style={{
+            animationDelay: '0.2s'
+          }}>
               <Card className="glass-card border-civic-accent/20">
                 <CardHeader className="text-center space-y-4">
                   <div className="w-20 h-20 bg-civic-accent/10 rounded-2xl flex items-center justify-center mx-auto glow">
@@ -151,20 +151,9 @@ const AdminLogin = () => {
                       </Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="your.name@bbmp.gov.in"
-                          className="pl-12"
-                          required
-                        />
+                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="your.name@bbmp.gov.in" required className="pl-12 bg-inherit" />
                       </div>
-                      {errors.email && (
-                        <p className="text-red-400 text-sm animate-pulse">❌ {errors.email}</p>
-                      )}
+                      {errors.email && <p className="text-red-400 text-sm animate-pulse">❌ {errors.email}</p>}
                     </div>
 
                     {/* Password */}
@@ -172,23 +161,11 @@ const AdminLogin = () => {
                       <Label htmlFor="password" className="text-civic-light font-medium">
                         Password
                       </Label>
-                      <Input
-                        id="password"
-                        name="password"
-                        type="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        placeholder="Enter your secure password"
-                        required
-                      />
+                      <Input id="password" name="password" type="password" value={formData.password} onChange={handleInputChange} placeholder="Enter your secure password" required className="bg-inherit" />
                     </div>
 
                     {/* Division Selector - Using the same component as signup */}
-                    <DivisionSelect 
-                      value={formData.division} 
-                      onChange={handleDivisionChange} 
-                      error={errors.division} 
-                    />
+                    <DivisionSelect value={formData.division} onChange={handleDivisionChange} error={errors.division} />
 
                     {/* Access Code */}
                     <div className="space-y-2">
@@ -197,24 +174,12 @@ const AdminLogin = () => {
                       </Label>
                       <div className="relative">
                         <Key className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
-                        <Input
-                          id="accessCode"
-                          name="accessCode"
-                          type="password"
-                          value={formData.accessCode}
-                          onChange={handleInputChange}
-                          placeholder="Enter security access code"
-                          className="pl-12"
-                          required
-                        />
+                        <Input id="accessCode" name="accessCode" type="password" value={formData.accessCode} onChange={handleInputChange} placeholder="Enter security access code" required className="pl-12 bg-inherit" />
                       </div>
                     </div>
 
                     {/* Submit Button */}
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-civic-accent/90 text-civic-dark hover:bg-civic-accent border border-civic-accent/50 backdrop-blur-md py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-civic-accent/25"
-                    >
+                    <Button type="submit" className="w-full bg-civic-accent/90 text-civic-dark hover:bg-civic-accent border border-civic-accent/50 backdrop-blur-md py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-civic-accent/25">
                       <Shield className="w-5 h-5 mr-2" />
                       Secure Login
                     </Button>
@@ -242,8 +207,6 @@ const AdminLogin = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AdminLogin;
