@@ -178,7 +178,7 @@ const AdminSignUpForm = () => {
               </Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-4 h-4 text-civic-accent" />
-                <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="your.name@bbmp.gov.in" className="pl-10" required />
+                <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="your.name@bbmp.gov.in" required className="pl-10 bg-inherit" />
               </div>
               {errors.email && <p className="text-red-400 text-sm animate-pulse">❌ {errors.email}</p>}
             </div>
@@ -190,7 +190,7 @@ const AdminSignUpForm = () => {
               </Label>
               <div className="relative">
                 <Phone className="absolute left-3 top-3 w-4 h-4 text-civic-accent" />
-                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="+91 98765 43210" className="pl-10" />
+                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="+91 98765 43210" className="pl-10 bg-inherit" />
               </div>
             </div>
 
