@@ -32,13 +32,13 @@ const Header = () => {
           </Link>
           
           <Link to="/admin-login">
-            <Button className="bg-civic-accent/20 text-civic-accent border border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover transition-all duration-300 bg-black text-inherit">
+            <Button className="bg-civic-accent/20 text-civic-accent border border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover transition-all duration-300 bg-black font-semibold text-white">
               Admin Login
             </Button>
           </Link>
 
           <Link to="/admin-signup">
-            <Button className="bg-civic-accent text-civic-dark hover:bg-opacity-80 glow-hover transition-all duration-300 text-inherit bg-black">
+            <Button className="bg-civic-accent text-civic-dark hover:bg-opacity-80 glow-hover transition-all duration-300 bg-black text-white">
               Admin Sign Up
             </Button>
           </Link>

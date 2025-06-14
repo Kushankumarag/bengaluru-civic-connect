@@ -46,14 +46,14 @@ const Hero = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link to="/login">
-              <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto bg-black text-inherit">
+              <Button size="lg" className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto bg-black text-white">
                 <Camera className="w-6 h-6 mr-3" />
                 Report an Issue
               </Button>
             </Link>
             
             <Link to="/admin-login">
-              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg font-semibold transition-all duration-300 w-full sm:w-auto bg-black text-inherit">
+              <Button size="lg" className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover py-6 px-10 text-lg transition-all duration-300 w-full sm:w-auto text-inherit bg-black font-semibold">
                 <Shield className="w-6 h-6 mr-3" />
                 Admin Dashboard
               </Button>
