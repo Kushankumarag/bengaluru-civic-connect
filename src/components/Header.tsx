@@ -11,50 +11,67 @@ const Header = () => {
   const languages = ['English', 'ಕನ್ನಡ', 'हिन्दी'];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
+    <header className="sticky top-0 z-50 glass-nav">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-civic-blue rounded-lg flex items-center justify-center">
-            <Shield className="w-5 h-5 text-white" />
+        <Link to="/" className="flex items-center space-x-3 hover-scale">
+          <div className="w-10 h-10 bg-civic-accent rounded-xl flex items-center justify-center glow">
+            <Shield className="w-6 h-6 text-civic-dark" />
           </div>
-          <span className="text-xl font-bold text-civic-blue">Urban Eye </span>
-        </div>
+          <span className="text-2xl font-bold text-civic-light font-space-grotesk">Urban Eye</span>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           <select 
             value={language} 
             onChange={e => setLanguage(e.target.value)} 
-            className="bg-transparent border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue"
+            className="glass text-civic-light border-0 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-accent"
           >
-            {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
+            {languages.map(lang => <option key={lang} value={lang} className="bg-civic-dark">{lang}</option>)}
           </select>
-          <Link to="/signup">
-            <Button variant="outline" size="sm" className="border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white">
-              Sign Up
+          
+          <Link to="/login">
+            <Button className="glass-card hover:glow-hover text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300">
+              User Login
+            </Button>
+          </Link>
+          
+          <Link to="/admin-login">
+            <Button className="bg-civic-accent text-civic-dark hover:bg-opacity-80 glow-hover transition-all duration-300">
+              Admin Login
             </Button>
           </Link>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2">
+        <button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+          className="md:hidden p-2 text-civic-light hover:text-civic-accent transition-colors"
+        >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t p-4 space-y-4">
+        <div className="md:hidden glass-card border-t border-civic-accent/20 p-4 space-y-4 animate-slide-up">
           <select 
             value={language} 
             onChange={e => setLanguage(e.target.value)} 
-            className="w-full bg-transparent border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue"
+            className="w-full glass text-civic-light border-0 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-civic-accent"
           >
-            {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
+            {languages.map(lang => <option key={lang} value={lang} className="bg-civic-dark">{lang}</option>)}
           </select>
-          <Link to="/signup" className="block">
-            <Button variant="outline" className="w-full border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white">
-              Sign Up
+          
+          <Link to="/login" className="block">
+            <Button className="w-full glass-card text-civic-accent border-civic-accent hover:bg-civic-accent hover:text-civic-dark transition-all duration-300">
+              User Login
+            </Button>
+          </Link>
+          
+          <Link to="/admin-login" className="block">
+            <Button className="w-full bg-civic-accent text-civic-dark hover:bg-opacity-80 transition-all duration-300">
+              Admin Login
             </Button>
           </Link>
         </div>

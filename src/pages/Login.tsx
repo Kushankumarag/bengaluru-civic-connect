@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Shield, ArrowLeft, Mail, Eye, EyeOff } from 'lucide-react';
+import { Shield, ArrowLeft, Mail, Eye, EyeOff, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -29,40 +29,45 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-civic-dark">
       {/* Header */}
-      <header className="bg-white border-b">
+      <header className="glass-nav">
         <div className="container mx-auto px-4 h-16 flex items-center">
-          <Link to="/" className="flex items-center space-x-2 text-civic-blue hover:opacity-80">
+          <Link to="/" className="flex items-center space-x-2 text-civic-accent hover:opacity-80 transition-opacity">
             <ArrowLeft className="w-5 h-5" />
-            <span>Back to Home</span>
+            <span className="font-medium">Back to Home</span>
           </Link>
-          <div className="flex items-center space-x-2 mx-auto">
-            <div className="w-8 h-8 bg-civic-blue rounded-lg flex items-center justify-center">
-              <Shield className="w-5 h-5 text-white" />
+          <div className="flex items-center space-x-3 mx-auto">
+            <div className="w-8 h-8 bg-civic-accent rounded-xl flex items-center justify-center glow">
+              <Shield className="w-5 h-5 text-civic-dark" />
             </div>
-            <span className="text-xl font-bold text-civic-blue">Urban Eye</span>
+            <span className="text-xl font-bold text-civic-light font-space-grotesk">Urban Eye</span>
           </div>
         </div>
       </header>
 
       {/* Login Form */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-civic-light-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-civic-blue" />
+          <Card className="glass-card border-civic-accent/20 animate-fade-in-up">
+            <CardHeader className="text-center space-y-4">
+              <div className="w-20 h-20 bg-civic-accent/10 rounded-2xl flex items-center justify-center mx-auto glow">
+                <Lock className="w-10 h-10 text-civic-accent" />
               </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">Welcome Back</CardTitle>
-              <p className="text-gray-600">Sign in to report civic issues</p>
+              <CardTitle className="text-3xl font-bold text-civic-light font-space-grotesk">
+                Welcome Back
+              </CardTitle>
+              <p className="text-civic-light/70">Sign in to report civic issues</p>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="email">Email Address</Label>
+            
+            <CardContent className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-civic-light font-medium">
+                    Email Address
+                  </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
                     <Input
                       id="email"
                       name="email"
@@ -70,14 +75,16 @@ const Login = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your.email@example.com"
-                      className="pl-10"
+                      className="glass pl-12 text-civic-light border-civic-accent/30 glow-border-focus"
                       required
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="password">Password</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-civic-light font-medium">
+                    Password
+                  </Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -86,25 +93,29 @@ const Login = () => {
                       value={formData.password}
                       onChange={handleInputChange}
                       placeholder="Enter your password"
+                      className="glass text-civic-light border-civic-accent/30 glow-border-focus pr-12"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-3 text-civic-accent hover:text-civic-accent/80 transition-colors"
                     >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-civic-blue hover:bg-civic-blue/90">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-civic-accent text-civic-dark hover:bg-civic-accent/90 glow-hover py-6 text-lg font-semibold transition-all duration-300"
+                >
                   Sign In
                 </Button>
 
-                <div className="text-center text-sm text-gray-600">
+                <div className="text-center text-civic-light/70">
                   Don't have an account?{' '}
-                  <Link to="/signup" className="text-civic-blue hover:underline">
+                  <Link to="/signup" className="text-civic-accent hover:text-civic-accent/80 font-medium transition-colors">
                     Create one here
                   </Link>
                 </div>

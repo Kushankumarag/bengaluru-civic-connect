@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Shield, ArrowLeft, User, Mail, Phone, MapPin } from 'lucide-react';
+import { Shield, ArrowLeft, User, Mail, Phone, MapPin, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
@@ -16,6 +16,8 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,38 +34,43 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-civic-dark">
       {/* Header */}
-      <header className="bg-white border-b">
+      <header className="glass-nav">
         <div className="container mx-auto px-4 h-16 flex items-center">
-          <Link to="/" className="flex items-center space-x-2 text-civic-blue hover:opacity-80">
+          <Link to="/" className="flex items-center space-x-2 text-civic-accent hover:opacity-80 transition-opacity">
             <ArrowLeft className="w-5 h-5" />
-            <span>Back to Home</span>
+            <span className="font-medium">Back to Home</span>
           </Link>
-          <div className="flex items-center space-x-2 mx-auto">
-            <div className="w-8 h-8 bg-civic-blue rounded-lg flex items-center justify-center">
-              <Shield className="w-5 h-5 text-white" />
+          <div className="flex items-center space-x-3 mx-auto">
+            <div className="w-8 h-8 bg-civic-accent rounded-xl flex items-center justify-center glow">
+              <Shield className="w-5 h-5 text-civic-dark" />
             </div>
-            <span className="text-xl font-bold text-civic-blue">Urban Eye</span>
+            <span className="text-xl font-bold text-civic-light font-space-grotesk">Urban Eye</span>
           </div>
         </div>
       </header>
 
       {/* Sign Up Form */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-civic-light-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                <User className="w-8 h-8 text-civic-blue" />
+          <Card className="glass-card border-civic-accent/20 animate-fade-in-up">
+            <CardHeader className="text-center space-y-4">
+              <div className="w-20 h-20 bg-civic-accent/10 rounded-2xl flex items-center justify-center mx-auto glow">
+                <User className="w-10 h-10 text-civic-accent" />
               </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">Create Your Account</CardTitle>
-              <p className="text-gray-600">Join thousands of Bengaluru citizens making a difference</p>
+              <CardTitle className="text-3xl font-bold text-civic-light font-space-grotesk">
+                Create Your Account
+              </CardTitle>
+              <p className="text-civic-light/70">Join thousands of Bengaluru citizens making a difference</p>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="fullName">Full Name</Label>
+            
+            <CardContent className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName" className="text-civic-light font-medium">
+                    Full Name
+                  </Label>
                   <Input
                     id="fullName"
                     name="fullName"
@@ -71,14 +78,17 @@ const SignUp = () => {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
+                    className="glass text-civic-light border-civic-accent/30 glow-border-focus"
                     required
                   />
                 </div>
 
-                <div>
-                  <Label htmlFor="email">Email Address</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-civic-light font-medium">
+                    Email Address
+                  </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
                     <Input
                       id="email"
                       name="email"
@@ -86,16 +96,18 @@ const SignUp = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your.email@example.com"
-                      className="pl-10"
+                      className="glass pl-12 text-civic-light border-civic-accent/30 glow-border-focus"
                       required
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="phone">Phone Number</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-civic-light font-medium">
+                    Phone Number
+                  </Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                    <Phone className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
                     <Input
                       id="phone"
                       name="phone"
@@ -103,16 +115,18 @@ const SignUp = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="+91 98765 43210"
-                      className="pl-10"
+                      className="glass pl-12 text-civic-light border-civic-accent/30 glow-border-focus"
                       required
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="address">Address in Bengaluru</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="address" className="text-civic-light font-medium">
+                    Address in Bengaluru
+                  </Label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                    <MapPin className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
                     <Input
                       id="address"
                       name="address"
@@ -120,45 +134,72 @@ const SignUp = () => {
                       value={formData.address}
                       onChange={handleInputChange}
                       placeholder="Your area/locality"
-                      className="pl-10"
+                      className="glass pl-12 text-civic-light border-civic-accent/30 glow-border-focus"
                       required
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="Create a strong password"
-                    required
-                  />
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-civic-light font-medium">
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      placeholder="Create a strong password"
+                      className="glass text-civic-light border-civic-accent/30 glow-border-focus pr-12"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-3 text-civic-accent hover:text-civic-accent/80 transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    placeholder="Confirm your password"
-                    required
-                  />
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword" className="text-civic-light font-medium">
+                    Confirm Password
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={showConfirmPassword ? "text" : "password"}
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                      placeholder="Confirm your password"
+                      className="glass text-civic-light border-civic-accent/30 glow-border-focus pr-12"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-3 text-civic-accent hover:text-civic-accent/80 transition-colors"
+                    >
+                      {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-civic-blue hover:bg-civic-blue/90">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-civic-accent text-civic-dark hover:bg-civic-accent/90 glow-hover py-6 text-lg font-semibold transition-all duration-300"
+                >
                   Create Account
                 </Button>
 
-                <div className="text-center text-sm text-gray-600">
+                <div className="text-center text-civic-light/70">
                   Already have an account?{' '}
-                  <Link to="/login" className="text-civic-blue hover:underline">
+                  <Link to="/login" className="text-civic-accent hover:text-civic-accent/80 font-medium transition-colors">
                     Sign in here
                   </Link>
                 </div>

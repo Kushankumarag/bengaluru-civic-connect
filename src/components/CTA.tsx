@@ -1,23 +1,47 @@
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Download } from 'lucide-react';
+
 const CTA = () => {
-  return <section className="py-16 px-4 bg-civic-green text-white">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Make a Difference?
-        </h2>
-        <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-          Join thousands of Bengaluru citizens who are actively improving their city
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/signup">
-            <Button size="lg" className="bg-white text-civic-green hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-              Get Started - Report Now
+  return (
+    <section className="py-20 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 civic-gradient opacity-10"></div>
+      
+      <div className="container mx-auto text-center relative z-10">
+        <div className="glass-card p-12 rounded-2xl max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-civic-light font-space-grotesk">
+            Ready to Make a <span className="text-civic-accent">Difference?</span>
+          </h2>
+          
+          <p className="text-xl mb-10 text-civic-light/80 max-w-2xl mx-auto leading-relaxed">
+            Join thousands of Bengaluru citizens who are actively improving their city 
+            through our smart reporting platform
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link to="/signup">
+              <Button 
+                size="lg" 
+                className="bg-civic-accent text-civic-dark hover:bg-opacity-90 glow-hover px-10 py-6 text-lg font-semibold transition-all duration-300"
+              >
+                Get Started - Report Now
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+            
+            <Button 
+              size="lg" 
+              className="glass-card text-civic-accent border-2 border-civic-accent hover:bg-civic-accent hover:text-civic-dark px-10 py-6 font-semibold text-lg transition-all duration-300"
+            >
+              <Download className="w-5 h-5 mr-2" />
+              Download App (Coming Soon)
             </Button>
-          </Link>
-          <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-civic-green text-[#34bf1d] px-[38px] py-[18px] font-semibold text-lg text-justify">      Download App -(Coming Soon)</Button>
+          </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default CTA;
