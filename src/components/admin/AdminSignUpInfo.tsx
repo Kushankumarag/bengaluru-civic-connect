@@ -1,9 +1,6 @@
-
 import { Building2 } from 'lucide-react';
-
 const AdminSignUpInfo = () => {
-  return (
-    <div className="glass-card p-6 rounded-2xl animate-fade-in-up">
+  return <div className="glass-card p-6 rounded-2xl animate-fade-in-up">
       <div className="text-center space-y-4">
         <div className="w-20 h-20 bg-civic-accent/10 rounded-2xl flex items-center justify-center mx-auto glow">
           <Building2 className="w-10 h-10 text-civic-accent" />
@@ -20,14 +17,12 @@ const AdminSignUpInfo = () => {
         
         <div className="space-y-3 text-civic-light/60 text-sm">
           <div className="glass p-3 rounded-lg">
-            <p className="font-semibold text-civic-accent mb-2">Access Code Format:</p>
-            <p>First 4 letters of division + "-2025"</p>
-            <p className="text-civic-accent text-xs mt-1">Example: BOMM-2025 for Bommanahalli</p>
+            
+            
+            
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AdminSignUpInfo;
