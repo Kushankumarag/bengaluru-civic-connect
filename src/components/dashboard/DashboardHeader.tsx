@@ -3,15 +3,37 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield, LogOut, Bell } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardHeader = () => {
   const { toast } = useToast();
+  const { signOut, user } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    toast({
-      title: "Logged out successfully",
-      description: "You have been safely logged out.",
-    });
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Logged out successfully",
+        description: "You have been safely logged out.",
+      });
+      navigate('/');
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to log out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const getUserInitials = (email: string) => {
+    return email.split('@')[0].substring(0, 2).toUpperCase();
+  };
+
+  const getUserDisplayName = (email: string) => {
+    return email.split('@')[0];
   };
 
   return (
@@ -40,11 +62,15 @@ const DashboardHeader = () => {
           
           <div className="flex items-center space-x-3">
             <div className="text-right">
-              <p className="text-sm font-medium text-civic-light">John Doe</p>
+              <p className="text-sm font-medium text-civic-light">
+                {user?.email ? getUserDisplayName(user.email) : 'User'}
+              </p>
               <p className="text-xs text-gray-400">Active Citizen</p>
             </div>
             <div className="w-8 h-8 bg-civic-accent/20 rounded-full flex items-center justify-center">
-              <span className="text-civic-accent font-semibold">JD</span>
+              <span className="text-civic-accent font-semibold text-xs">
+                {user?.email ? getUserInitials(user.email) : 'U'}
+              </span>
             </div>
           </div>
 

@@ -1,8 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import ReportIssueForm from '@/components/dashboard/ReportIssueForm';
 import ComplaintsList from '@/components/dashboard/ComplaintsList';
@@ -15,7 +17,28 @@ type ViewType = 'overview' | 'report' | 'complaints' | 'map' | 'profile' | 'help
 
 const UserDashboard = () => {
   const [activeView, setActiveView] = useState<ViewType>('overview');
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/login');
+    }
+  }, [user, loading, navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-civic-dark flex items-center justify-center">
+        <div className="text-civic-light">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null; // Will redirect to login
+  }
 
   const navigationItems = [
     { id: 'overview', label: 'Overview', icon: Shield },
