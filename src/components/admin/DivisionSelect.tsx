@@ -45,12 +45,12 @@ const DivisionSelect = ({ value, onChange, error }: DivisionSelectProps) => {
         <SelectTrigger className="glass text-civic-light border-civic-accent/30 glow-border-focus">
           <SelectValue placeholder="Select your assigned division" />
         </SelectTrigger>
-        <SelectContent className="glass bg-civic-dark border-civic-accent/30 max-h-60">
+        <SelectContent className="bg-civic-dark/95 backdrop-blur-md border-civic-accent/30 max-h-60 z-50">
           {divisions.map((division) => (
             <SelectItem 
               key={division} 
               value={division}
-              className="text-civic-light hover:bg-civic-accent/20 focus:bg-civic-accent/20"
+              className="text-civic-light hover:bg-civic-accent/30 focus:bg-civic-accent/30 cursor-pointer px-3 py-2 bg-civic-dark/80"
             >
               {division}
             </SelectItem>

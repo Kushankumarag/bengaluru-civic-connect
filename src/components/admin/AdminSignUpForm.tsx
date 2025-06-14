@@ -187,7 +187,7 @@ const AdminSignUpForm = () => {
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="Enter your full name"
-                  className="glass pl-10 text-civic-light border-civic-accent/30 glow-border-focus"
+                  className="bg-civic-dark/80 backdrop-blur-md pl-10 text-civic-light border-civic-accent/30 glow-border-focus focus:bg-civic-dark/90"
                   required
                 />
               </div>
@@ -207,7 +207,7 @@ const AdminSignUpForm = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="your.name@bbmp.gov.in"
-                  className="glass pl-10 text-civic-light border-civic-accent/30 glow-border-focus"
+                  className="bg-civic-dark/80 backdrop-blur-md pl-10 text-civic-light border-civic-accent/30 glow-border-focus focus:bg-civic-dark/90"
                   required
                 />
               </div>
@@ -230,7 +230,7 @@ const AdminSignUpForm = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="+91 98765 43210"
-                  className="glass pl-10 text-civic-light border-civic-accent/30 glow-border-focus"
+                  className="bg-civic-dark/80 backdrop-blur-md pl-10 text-civic-light border-civic-accent/30 glow-border-focus focus:bg-civic-dark/90"
                 />
               </div>
             </div>
@@ -278,7 +278,7 @@ const AdminSignUpForm = () => {
             <Button 
               type="submit" 
               disabled={isLoading}
-              className="w-full bg-civic-accent text-civic-dark hover:bg-civic-accent/90 glow-hover py-6 text-lg font-semibold transition-all duration-300 disabled:opacity-50"
+              className="w-full bg-civic-accent/90 text-civic-dark hover:bg-civic-accent border border-civic-accent/50 backdrop-blur-md py-6 text-lg font-semibold transition-all duration-300 disabled:opacity-50 shadow-lg hover:shadow-civic-accent/25"
             >
               {isLoading ? (
                 <div className="flex items-center space-x-2">
@@ -297,7 +297,7 @@ const AdminSignUpForm = () => {
       </Card>
 
       {/* Security Notice */}
-      <div className="mt-4 glass-card p-3 rounded-xl border-yellow-500/30">
+      <div className="mt-4 bg-yellow-500/10 backdrop-blur-md border border-yellow-500/30 p-3 rounded-xl">
         <p className="text-yellow-400 font-medium text-center text-sm">
           🔐 Secure Registration - All data is encrypted and verified
         </p>
