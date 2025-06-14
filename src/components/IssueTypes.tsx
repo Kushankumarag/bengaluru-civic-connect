@@ -24,7 +24,7 @@ const IssueTypes = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             What Can You Report?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto text-slate-50">
             From potholes to power cuts, we've got you covered
           </p>
         </div>
