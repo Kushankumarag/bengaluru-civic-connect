@@ -117,6 +117,8 @@ const AdminSignUpForm = () => {
 
     setIsLoading(true);
     try {
+      console.log('Starting admin signup process...');
+      
       const { error } = await adminSignUp(
         formData.email,
         formData.password,
@@ -127,19 +129,26 @@ const AdminSignUpForm = () => {
       );
 
       if (error) {
+        console.error('Admin signup failed:', error);
         toast({
           title: "Registration Failed",
           description: error.message || "An error occurred during registration",
           variant: "destructive"
         });
       } else {
+        console.log('Admin signup successful');
         toast({
           title: "Registration Successful! ✅",
-          description: "Your admin account has been created. Please check your email to verify your account."
+          description: "Your admin account has been created. You can now log in with your credentials."
         });
-        navigate('/admin-login');
+        
+        // Navigate to login after a short delay
+        setTimeout(() => {
+          navigate('/admin-login');
+        }, 2000);
       }
     } catch (error: any) {
+      console.error('Admin signup exception:', error);
       toast({
         title: "Registration Failed",
         description: error.message || "An error occurred during registration",
