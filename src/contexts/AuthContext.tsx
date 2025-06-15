@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -72,26 +71,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signIn = async (email: string, password: string) => {
-    // First check if user exists in profiles table
-    const { data: userProfile, error: profileError } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('email', email)
-      .maybeSingle();
+    console.log('User login attempt:', { email });
+    
+    try {
+      // Directly authenticate with Supabase - no need to check profiles first
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (profileError && profileError.code !== 'PGRST116') {
-      return { error: profileError };
+      console.log('User auth response:', { data, error });
+
+      if (error) {
+        console.error('User authentication failed:', error);
+        return { error };
+      }
+
+      if (!data.user) {
+        console.error('No user returned from auth');
+        return { error: { message: 'Authentication failed - no user returned' } };
+      }
+
+      // Optional: Verify user has a profile (but don't block login if they don't)
+      const { data: userProfile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', data.user.id)
+        .maybeSingle();
+
+      console.log('User profile check:', { userProfile, profileError });
+
+      // Even if profile doesn't exist, allow login to proceed
+      // The profile might be created by the trigger
+      console.log('User login successful');
+      return { error: null };
+
+    } catch (err) {
+      console.error('User login exception:', err);
+      return { error: err };
     }
-
-    if (!userProfile) {
-      return { error: { message: 'User not found. Please sign up first.' } };
-    }
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { error };
   };
 
   const adminSignUp = async (email: string, password: string, fullName: string, phone: string, division: string, accessCode: string) => {
