@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, Map, Filter, Download } from 'lucide-react';
+import FilterSelect from './FilterSelect';
 
 interface AdminSidebarProps {
   viewMode: 'table' | 'map';
@@ -24,11 +23,33 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   onFiltersChange,
   complaintsCount
 }) => {
-  const categories = ['roads', 'drainage', 'lighting', 'waste', 'water', 'parks'];
-  const severities = ['low', 'medium', 'high', 'critical'];
-  const statuses = ['pending', 'in-progress', 'resolved'];
-  const dateRanges = [
-    { value: '', label: 'All Time' },
+  const categoryOptions = [
+    { value: 'all', label: 'All Categories' },
+    { value: 'roads', label: 'Roads' },
+    { value: 'drainage', label: 'Drainage' },
+    { value: 'lighting', label: 'Lighting' },
+    { value: 'waste', label: 'Waste' },
+    { value: 'water', label: 'Water' },
+    { value: 'parks', label: 'Parks' }
+  ];
+
+  const severityOptions = [
+    { value: 'all', label: 'All Severities' },
+    { value: 'low', label: 'Low' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'high', label: 'High' },
+    { value: 'critical', label: 'Critical' }
+  ];
+
+  const statusOptions = [
+    { value: 'all', label: 'All Statuses' },
+    { value: 'pending', label: 'Pending' },
+    { value: 'in-progress', label: 'In Progress' },
+    { value: 'resolved', label: 'Resolved' }
+  ];
+
+  const dateRangeOptions = [
+    { value: 'all', label: 'All Time' },
     { value: 'today', label: 'Today' },
     { value: 'week', label: 'This Week' },
     { value: 'month', label: 'This Month' }
@@ -69,84 +90,33 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         </div>
 
         <div className="space-y-4">
-          <div>
-            <label className="text-xs text-gray-500 mb-1 block">Category</label>
-            <Select
-              value={filters.category}
-              onValueChange={(value) => onFiltersChange({...filters, category: value})}
-            >
-              <SelectTrigger className="glass glow-border-focus">
-                <SelectValue placeholder="All Categories" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">All Categories</SelectItem>
-                {categories.map(category => (
-                  <SelectItem key={category} value={category}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <FilterSelect
+            label="Category"
+            value={filters.category}
+            onValueChange={(value) => onFiltersChange({...filters, category: value})}
+            options={categoryOptions}
+          />
 
-          <div>
-            <label className="text-xs text-gray-500 mb-1 block">Severity</label>
-            <Select
-              value={filters.severity}
-              onValueChange={(value) => onFiltersChange({...filters, severity: value})}
-            >
-              <SelectTrigger className="glass glow-border-focus">
-                <SelectValue placeholder="All Severities" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">All Severities</SelectItem>
-                {severities.map(severity => (
-                  <SelectItem key={severity} value={severity}>
-                    {severity.charAt(0).toUpperCase() + severity.slice(1)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <FilterSelect
+            label="Severity"
+            value={filters.severity}
+            onValueChange={(value) => onFiltersChange({...filters, severity: value})}
+            options={severityOptions}
+          />
 
-          <div>
-            <label className="text-xs text-gray-500 mb-1 block">Status</label>
-            <Select
-              value={filters.status}
-              onValueChange={(value) => onFiltersChange({...filters, status: value})}
-            >
-              <SelectTrigger className="glass glow-border-focus">
-                <SelectValue placeholder="All Statuses" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">All Statuses</SelectItem>
-                {statuses.map(status => (
-                  <SelectItem key={status} value={status}>
-                    {status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ')}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <FilterSelect
+            label="Status"
+            value={filters.status}
+            onValueChange={(value) => onFiltersChange({...filters, status: value})}
+            options={statusOptions}
+          />
 
-          <div>
-            <label className="text-xs text-gray-500 mb-1 block">Date Range</label>
-            <Select
-              value={filters.dateRange}
-              onValueChange={(value) => onFiltersChange({...filters, dateRange: value})}
-            >
-              <SelectTrigger className="glass glow-border-focus">
-                <SelectValue placeholder="All Time" />
-              </SelectTrigger>
-              <SelectContent>
-                {dateRanges.map(range => (
-                  <SelectItem key={range.value} value={range.value}>
-                    {range.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <FilterSelect
+            label="Date Range"
+            value={filters.dateRange}
+            onValueChange={(value) => onFiltersChange({...filters, dateRange: value})}
+            options={dateRangeOptions}
+          />
         </div>
       </div>
 
