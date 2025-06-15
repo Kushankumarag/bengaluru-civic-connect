@@ -53,10 +53,10 @@ const AdminDashboard = () => {
   const [selectedComplaint, setSelectedComplaint] = useState<Complaint | null>(null);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [filters, setFilters] = useState({
-    category: '',
-    severity: '',
-    status: '',
-    dateRange: ''
+    category: 'all',
+    severity: 'all',
+    status: 'all',
+    dateRange: 'all'
   });
 
   useEffect(() => {
@@ -113,19 +113,19 @@ const AdminDashboard = () => {
   const applyFilters = () => {
     let filtered = [...complaints];
 
-    if (filters.category) {
+    if (filters.category && filters.category !== 'all') {
       filtered = filtered.filter(complaint => complaint.category === filters.category);
     }
 
-    if (filters.severity) {
+    if (filters.severity && filters.severity !== 'all') {
       filtered = filtered.filter(complaint => complaint.severity === filters.severity);
     }
 
-    if (filters.status) {
+    if (filters.status && filters.status !== 'all') {
       filtered = filtered.filter(complaint => complaint.status === filters.status);
     }
 
-    if (filters.dateRange) {
+    if (filters.dateRange && filters.dateRange !== 'all') {
       const now = new Date();
       let cutoffDate = new Date();
 
