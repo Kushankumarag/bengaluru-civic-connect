@@ -30,15 +30,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Clean up any existing auth state issues
-    const cleanupAuthState = () => {
-      Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith('supabase.auth.') || key.includes('sb-')) {
-          localStorage.removeItem(key);
-        }
-      });
-    };
-
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
@@ -107,9 +98,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Admin signup attempt:', { email, fullName, division, accessCode });
     
     try {
-      // Clean up any existing auth state first
-      await supabase.auth.signOut();
-      
       const redirectUrl = `${window.location.origin}/admin-dashboard`;
       
       const { data, error } = await supabase.auth.signUp({
@@ -128,19 +116,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       console.log('Admin signup response:', { data, error });
-      
-      if (error) {
-        console.error('Admin signup error:', error);
-        return { error };
-      }
-
-      // Wait a moment for the trigger to create the admin profile
-      if (data.user && !error) {
-        console.log('Admin user created, waiting for profile creation...');
-        // Give the database trigger time to create the admin profile
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      }
-      
       return { error };
     } catch (err) {
       console.error('Admin signup exception:', err);
@@ -152,9 +127,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Admin login attempt:', { email, division, accessCode });
     
     try {
-      // Clean up any existing auth state first
-      await supabase.auth.signOut();
-      
       // First, authenticate with Supabase
       const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email,
@@ -173,16 +145,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { error: { message: 'Authentication failed - no user returned' } };
       }
 
-      // Wait a moment for the session to be established
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
       // Now check if admin profile exists with matching credentials
       console.log('Checking admin profile for user:', authData.user.id);
       
       const { data: adminProfile, error: profileError } = await supabase
         .from('admin_profiles')
         .select('*')
-        .eq('email', email)
+        .eq('id', authData.user.id)
         .eq('division', division)
         .eq('access_code', accessCode)
         .maybeSingle();
@@ -191,14 +160,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (profileError && profileError.code !== 'PGRST116') {
         console.error('Profile query error:', profileError);
-        // Sign out the user since validation failed
         await supabase.auth.signOut();
         return { error: profileError };
       }
 
       if (!adminProfile) {
         console.error('Admin profile not found or credentials mismatch');
-        // Sign out the user since validation failed
         await supabase.auth.signOut();
         return { 
           error: { 
