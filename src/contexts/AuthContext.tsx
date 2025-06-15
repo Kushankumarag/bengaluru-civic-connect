@@ -113,7 +113,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const adminSignUp = async (email: string, password: string, fullName: string, phone: string, division: string, accessCode: string) => {
-    console.log('Admin signup attempt:', { email, fullName, division, accessCode });
+    console.log('Admin signup attempt:', { email, fullName, division });
     
     try {
       const redirectUrl = `${window.location.origin}/admin-dashboard`;
@@ -127,7 +127,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             full_name: fullName,
             phone: phone,
             division: division,
-            access_code: accessCode,
+            access_code: '', // Empty access code
             user_type: 'admin'
           }
         }
@@ -142,7 +142,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const adminSignIn = async (email: string, password: string, division: string, accessCode: string) => {
-    console.log('Admin login attempt:', { email, division, accessCode });
+    console.log('Admin login attempt:', { email, division });
     
     try {
       // First, authenticate with Supabase - just like user login
@@ -163,7 +163,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { error: { message: 'Authentication failed - no user returned' } };
       }
 
-      // Now check if admin profile exists with matching credentials
+      // Now check if admin profile exists with matching division (no access code validation)
       console.log('Checking admin profile for user:', data.user.id);
       
       const { data: adminProfile, error: profileError } = await supabase
@@ -171,7 +171,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .select('*')
         .eq('id', data.user.id)
         .eq('division', division)
-        .eq('access_code', accessCode)
         .maybeSingle();
 
       console.log('Admin profile query result:', { adminProfile, profileError });
@@ -183,11 +182,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       if (!adminProfile) {
-        console.error('Admin profile not found or credentials mismatch');
+        console.error('Admin profile not found or division mismatch');
         await supabase.auth.signOut();
         return { 
           error: { 
-            message: 'Admin credentials not found. Please check your division and access code, or sign up first.' 
+            message: 'Admin credentials not found. Please check your division or sign up first.' 
           } 
         };
       }

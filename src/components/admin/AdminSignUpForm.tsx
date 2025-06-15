@@ -10,7 +10,6 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import DivisionSelect from './DivisionSelect';
 import PasswordInput from './PasswordInput';
-import AccessCodeInput from './AccessCodeInput';
 
 const AdminSignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -19,28 +18,19 @@ const AdminSignUpForm = () => {
     phone: '',
     password: '',
     confirmPassword: '',
-    division: '',
-    accessCode: ''
+    division: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
     email: '',
     password: '',
     confirmPassword: '',
-    accessCode: '',
     division: ''
   });
   
   const { toast } = useToast();
   const navigate = useNavigate();
   const { adminSignUp } = useAuth();
-
-  const generateAccessCode = (division: string) => {
-    if (!division) return '';
-    const divisionName = division.split(' ')[0];
-    const prefix = divisionName.substring(0, 4).toUpperCase();
-    return `${prefix}-2025`;
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,8 +50,7 @@ const AdminSignUpForm = () => {
   const handleDivisionChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
-      division: value,
-      accessCode: ''
+      division: value
     }));
 
     if (errors.division) {
@@ -72,18 +61,11 @@ const AdminSignUpForm = () => {
     }
   };
 
-  const validateAccessCode = () => {
-    if (!formData.division || !formData.accessCode) return false;
-    const expectedCode = generateAccessCode(formData.division);
-    return formData.accessCode === expectedCode;
-  };
-
   const validateForm = () => {
     const newErrors = {
       email: '',
       password: '',
       confirmPassword: '',
-      accessCode: '',
       division: ''
     };
 
@@ -101,10 +83,6 @@ const AdminSignUpForm = () => {
 
     if (!formData.division) {
       newErrors.division = 'Please select your division';
-    }
-
-    if (!validateAccessCode()) {
-      newErrors.accessCode = 'Invalid access code for selected division';
     }
 
     setErrors(newErrors);
@@ -125,7 +103,7 @@ const AdminSignUpForm = () => {
         formData.fullName,
         formData.phone,
         formData.division,
-        formData.accessCode
+        '' // Empty access code
       );
 
       if (error) {
@@ -263,14 +241,6 @@ const AdminSignUpForm = () => {
               value={formData.division}
               onChange={handleDivisionChange}
               error={errors.division}
-            />
-
-            {/* Access Code */}
-            <AccessCodeInput
-              value={formData.accessCode}
-              onChange={handleInputChange}
-              division={formData.division}
-              error={errors.accessCode}
             />
 
             {/* Submit Button */}

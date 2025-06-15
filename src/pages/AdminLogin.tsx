@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Shield, ArrowLeft, Building2, Lock, Mail, Key } from 'lucide-react';
+import { Shield, ArrowLeft, Building2, Lock, Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -14,7 +14,6 @@ const AdminLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    accessCode: '',
     division: ''
   });
   const [errors, setErrors] = useState({
@@ -84,7 +83,7 @@ const AdminLogin = () => {
         formData.email,
         formData.password,
         formData.division,
-        formData.accessCode
+        '' // Empty access code
       );
 
       if (error) {
@@ -234,26 +233,6 @@ const AdminLogin = () => {
                       onChange={handleDivisionChange}
                       error={errors.division}
                     />
-
-                    {/* Access Code */}
-                    <div className="space-y-2">
-                      <Label htmlFor="accessCode" className="text-civic-light font-medium">
-                        Access Code
-                      </Label>
-                      <div className="relative">
-                        <Key className="absolute left-3 top-3 w-5 h-5 text-civic-accent" />
-                        <Input
-                          id="accessCode"
-                          name="accessCode"
-                          type="password"
-                          value={formData.accessCode}
-                          onChange={handleInputChange}
-                          placeholder="Enter security access code"
-                          required
-                          className="pl-12 bg-inherit"
-                        />
-                      </div>
-                    </div>
 
                     {/* Submit Button */}
                     <Button
