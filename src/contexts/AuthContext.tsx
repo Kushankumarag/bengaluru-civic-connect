@@ -145,31 +145,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Admin login attempt:', { email, division, accessCode });
     
     try {
-      // First, authenticate with Supabase
-      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+      // First, authenticate with Supabase - just like user login
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      console.log('Auth response:', { authData, authError });
+      console.log('Admin auth response:', { data, error });
 
-      if (authError) {
-        console.error('Authentication failed:', authError);
-        return { error: authError };
+      if (error) {
+        console.error('Admin authentication failed:', error);
+        return { error };
       }
 
-      if (!authData.user) {
+      if (!data.user) {
         console.error('No user returned from auth');
         return { error: { message: 'Authentication failed - no user returned' } };
       }
 
       // Now check if admin profile exists with matching credentials
-      console.log('Checking admin profile for user:', authData.user.id);
+      console.log('Checking admin profile for user:', data.user.id);
       
       const { data: adminProfile, error: profileError } = await supabase
         .from('admin_profiles')
         .select('*')
-        .eq('id', authData.user.id)
+        .eq('id', data.user.id)
         .eq('division', division)
         .eq('access_code', accessCode)
         .maybeSingle();
