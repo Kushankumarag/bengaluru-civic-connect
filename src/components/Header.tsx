@@ -37,11 +37,6 @@ const Header = () => {
             </Button>
           </Link>
 
-          <Link to="/admin-signup">
-            <Button className="bg-civic-accent text-white hover:bg-civic-accent/90">
-              Admin Sign Up
-            </Button>
-          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -74,11 +69,6 @@ const Header = () => {
             </Button>
           </Link>
 
-          <Link to="/admin-signup" className="block">
-            <Button className="w-full bg-civic-accent text-white hover:bg-civic-accent/90">
-              Admin Sign Up
-            </Button>
-          </Link>
         </div>}
     </header>;
 };

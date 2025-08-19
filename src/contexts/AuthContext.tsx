@@ -8,7 +8,7 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, fullName: string, phone: string, address: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  adminSignUp: (email: string, password: string, fullName: string, phone: string, division: string, accessCode: string) => Promise<{ error: any }>;
+  
   adminSignIn: (email: string, password: string, division: string, accessCode: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
@@ -112,34 +112,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const adminSignUp = async (email: string, password: string, fullName: string, phone: string, division: string, accessCode: string) => {
-    console.log('Admin signup attempt:', { email, fullName, division });
-    
-    try {
-      const redirectUrl = `${window.location.origin}/admin-dashboard`;
-      
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: redirectUrl,
-          data: {
-            full_name: fullName,
-            phone: phone,
-            division: division,
-            access_code: '', // Empty access code
-            user_type: 'admin'
-          }
-        }
-      });
-      
-      console.log('Admin signup response:', { data, error });
-      return { error };
-    } catch (err) {
-      console.error('Admin signup exception:', err);
-      return { error: err };
-    }
-  };
 
   const adminSignIn = async (email: string, password: string, division: string, accessCode: string) => {
     console.log('Admin login attempt:', { email, division });
@@ -211,7 +183,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loading,
     signUp,
     signIn,
-    adminSignUp,
+    
     adminSignIn,
     signOut,
   };
