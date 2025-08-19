@@ -254,10 +254,7 @@ const AdminLogin = () => {
                     </Button>
 
                     <div className="text-center text-civic-light/70">
-                      New admin?{' '}
-                      <Link to="/admin-signup" className="text-civic-accent hover:text-civic-accent/80 font-medium transition-colors">
-                        Register here
-                      </Link>
+                      For access issues, contact your IT administrator.
                     </div>
                   </form>
                 </CardContent>

@@ -135,14 +135,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { error: { message: 'Authentication failed - no user returned' } };
       }
 
-      // Now check if admin profile exists with matching division (no access code validation)
+      // Now check if admin profile exists (check by user ID only, not division)
       console.log('Checking admin profile for user:', data.user.id);
       
       const { data: adminProfile, error: profileError } = await supabase
         .from('admin_profiles')
         .select('*')
         .eq('id', data.user.id)
-        .eq('division', division)
         .maybeSingle();
 
       console.log('Admin profile query result:', { adminProfile, profileError });
@@ -154,11 +153,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       if (!adminProfile) {
-        console.error('Admin profile not found or division mismatch');
+        console.error('Admin profile not found');
         await supabase.auth.signOut();
         return { 
           error: { 
-            message: 'Admin credentials not found. Please check your division or sign up first.' 
+            message: 'Admin credentials not found. Please contact your administrator.' 
           } 
         };
       }
